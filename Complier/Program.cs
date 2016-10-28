@@ -1,6 +1,7 @@
 ﻿using Complier.LexicalAnalysis;
 using Complier.SyntaxAnalysis;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,8 +48,7 @@ int main()
             QuaternionTypeTable table = new QuaternionTypeTable();
             table.PrintAst(ast);
 
-
-
+            //编译
 
 
             Console.ReadKey();

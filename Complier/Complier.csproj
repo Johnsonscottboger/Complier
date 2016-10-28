@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Complier\Complier.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="LexicalAnalysis\Tokenizer.cs" />
     <Compile Include="Model\Ast\AstNode.cs" />
