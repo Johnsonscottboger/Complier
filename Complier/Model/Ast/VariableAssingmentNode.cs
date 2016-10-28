@@ -3,6 +3,9 @@ using Complier.SyntaxAnalysis;
 
 namespace Complier.Model.Ast
 {
+    /// <summary>
+    /// 变量赋值
+    /// </summary>
     class VariableAssingmentNode : AstNode
     {
         public string VariableName { get; private set; }
@@ -16,6 +19,11 @@ namespace Complier.Model.Ast
             VariableName = name;
             ValueExpression = expr;
         }
-        
+
+        public override void Print()
+        {
+            Console.Write("{0}\t,{1}\t\t ", "VarAssing", this.VariableName);
+            ValueExpression.Print();
+        }
     }
 }

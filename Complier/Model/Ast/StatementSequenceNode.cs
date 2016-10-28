@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Complier.Model.Ast
 {
@@ -28,6 +29,13 @@ namespace Complier.Model.Ast
         {
             subNodes.Add(node);
         }
-        
+
+        public override void Print()
+        {
+            foreach(var item in SubNodes)
+            {
+                item.Print();
+            }
+        }
     }
 }

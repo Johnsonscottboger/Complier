@@ -3,6 +3,9 @@ using System;
 
 namespace Complier.Model.Ast
 {
+    /// <summary>
+    /// 变量定义
+    /// </summary>
     class VariableDeclarationNode : AstNode
     {
         public ExpressionNode InitialValueExpression { get; private set; }
@@ -27,5 +30,10 @@ namespace Complier.Model.Ast
             InitialValueExpression = initialValue;
         }
 
+        public override void Print()
+        {
+            Console.WriteLine("{0}\t,{1}\t\t,{2} ", "VarDeclar", this.Type, this.Name);
+            InitialValueExpression.Print();
+        }
     }
 }

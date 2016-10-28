@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Complier.Model.Ast
 {
+    /// <summary>
+    /// 一元操作符
+    /// </summary>
     class UnaryOperationNode : ExpressionNode
     {
         public ExpressionOperationType OperationType { get; private set; }
@@ -18,6 +21,11 @@ namespace Complier.Model.Ast
             OperationType = opType;
             Operand = operand;
         }
-        
+
+        public override void Print()
+        {
+            Console.Write("{0}\t\t ", this.OperationType);
+            this.Operand.Print();
+        }
     }
 }

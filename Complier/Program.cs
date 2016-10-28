@@ -30,6 +30,7 @@ int main()
 }";
             #endregion
 
+            //词法分析
             var lexer = new Tokenizer(code);
             var tokens = lexer.Tokenize();
 
@@ -37,13 +38,16 @@ int main()
             {
                 Console.WriteLine(token);
             }
-
-            Console.WriteLine();
-            Console.WriteLine();
-
-            //parsing
+            
+            //抽象语法树
             var parser = new Parser(tokens);
             var ast = parser.ParseToAst();
+
+            //四元式表
+            QuaternionTypeTable table = new QuaternionTypeTable();
+            table.PrintAst(ast);
+
+
 
 
 

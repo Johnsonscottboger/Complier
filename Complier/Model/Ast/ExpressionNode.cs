@@ -3,6 +3,9 @@ using Complier.SyntaxAnalysis;
 
 namespace Complier.Model.Ast
 {
+    /// <summary>
+    /// 抽象表达式结点
+    /// </summary>
     abstract class ExpressionNode : AstNode
     {
         protected ExpressionNode()
@@ -10,7 +13,6 @@ namespace Complier.Model.Ast
 
         public static ExpressionNode CreateFromTokens(IEnumerable<Token> tokens)
         {
-            //Now we need to parse the given tokens into a expression tree.
             return new ExpressionParser().Parse(tokens);
         }
 

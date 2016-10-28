@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Complier.Model.Ast
 {
+    /// <summary>
+    /// 二元操作符结点
+    /// </summary>
     class BinaryOperationNode : ExpressionNode
     {
         public ExpressionOperationType OperationType { get; private set; }
@@ -36,6 +39,13 @@ namespace Complier.Model.Ast
             OperationType = opType;
             OperandA = operandA;
             OperandB = operandB;
+        }
+
+        public override void Print()
+        {
+            Console.Write("{0}\t\t ", this.OperationType);
+            this.OperandA.Print();
+            this.OperandB.Print();
         }
     }
 }

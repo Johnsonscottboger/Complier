@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Complier.Model.Ast
 {
+    /// <summary>
+    /// 函数调用
+    /// </summary>
     class FunctionCallExpressionNode : ExpressionNode
     {
         public string FunctionName { get; private set; }
@@ -43,6 +47,13 @@ namespace Complier.Model.Ast
         public void AddArguments(IEnumerable<ExpressionNode> args)
         {
             arguments.AddRange(args);
+        }
+
+        
+        public override void Print()
+        {
+            Console.WriteLine("{0}\t\t,{1}\t ", "FunCall", this.FunctionName);
+            arguments.ForEach(p=>p.Print());
         }
     }
 }

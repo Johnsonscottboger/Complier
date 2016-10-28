@@ -84,6 +84,7 @@
     <Compile Include="SyntaxAnalysis\ExpressionParser.cs" />
     <Compile Include="SyntaxAnalysis\Parser.cs" />
     <Compile Include="SyntaxAnalysis\ParsingException.cs" />
+    <Compile Include="SyntaxAnalysis\QuaternionTypeTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

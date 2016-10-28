@@ -8,23 +8,23 @@ namespace Complier.Model.Ast
 {
     enum ExpressionOperationType
     {
-        Add,
-        Substract,
-        Multiply,
-        Divide,
-        Modulo,
-        Assignment,
-        Equals,
-        GreaterThan,
-        LessThan,
-        GreaterEquals,
-        LessEquals,
-        NotEquals,
-        Not,
-        And,
-        Or,
-        Negate,
-        FunctionCall,
-        OpenBrace,
+        Add,            //加
+        Substract,      //减
+        Multiply,       //乘
+        Divide,         //除
+        Modulo,         //取模
+        Assignment,     //赋值
+        Equals,         //相等
+        GreaterThan,    //大于
+        LessThan,       //小于
+        GreaterEquals,  //大于等于
+        LessEquals,     //小于等于
+        NotEquals,      //不相等
+        Not,            //非
+        And,            //与
+        Or,             //或
+        Negate,         //否
+        FunctionCall,   //函数调用
+        OpenBrace,      //开括号
     }
 }
