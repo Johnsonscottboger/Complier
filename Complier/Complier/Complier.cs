@@ -14,6 +14,9 @@ namespace Complier.Complier
             CodeDomProvider compiler = new Microsoft.CSharp.CSharpCodeProvider();
             CompilerParameters parameters = new CompilerParameters();
             parameters.ReferencedAssemblies.Add("System.dll");
+
+            parameters.GenerateExecutable = true;
+
             return compiler.CompileAssemblyFromSource(parameters, codes);
         }
 
@@ -25,8 +28,7 @@ using System.Text;using System.Text.RegularExpressions;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Forms
-;using System.Threading;
+using System.Threading;
 using System.Reflection;
 ";
             string codeHead = @"
@@ -39,6 +41,7 @@ sealed class SimpleC
             //userCode here
             string codeTail = @"
 //----------your code here-----------
+        Console.WriteLine(i);
     }
 }
 ";

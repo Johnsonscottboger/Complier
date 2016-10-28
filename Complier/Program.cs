@@ -14,22 +14,24 @@ namespace Complier
         static void Main(string[] args)
         {
             #region 源程序
-            string code = @"
-int a = 5;
+//            string code = @"
+//int a = 5;
 
-int func(int b)
-{
-    int c = (5*b)+7;
-    return c;
-}
+//int func(int b)
+//{
+//    int c = (5*b)+7;
+//    return c;
+//}
 
-int main()
-{
-    a = 6;
-    func(4);
-    return a*2;
-}";
+//int main()
+//{
+//    a = 6;
+//    func(4);
+//    return a*2;
+//}";
             #endregion
+            string code="int i = 2;";
+
 
             //词法分析
             var lexer = new Tokenizer(code);
@@ -49,7 +51,10 @@ int main()
             table.PrintAst(ast);
 
             //编译
-
+            Complier.Complier complier = new Complier.Complier();
+            var comCode = complier.GenerateCode(code);
+            var comResult = complier.Compile(comCode);
+            complier.ShowCompileResult(comResult);
 
             Console.ReadKey();
         }
