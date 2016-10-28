@@ -43,11 +43,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="LexicalAnalysis\Tokenizer.cs" />
+    <Compile Include="Model\Lexing.cs" />
+    <Compile Include="Model\SourceCode.cs" />
+    <Compile Include="Model\Token.cs" />
+    <Compile Include="Model\Tokens\ArgSeperatorToken.cs" />
+    <Compile Include="Model\Tokens\BraceToken.cs" />
+    <Compile Include="Model\Tokens\BraceType.cs" />
+    <Compile Include="Model\Tokens\CloseBraceToken.cs" />
+    <Compile Include="Model\Tokens\IdentifierToken.cs" />
+    <Compile Include="Model\Tokens\KeywordToken.cs" />
+    <Compile Include="Model\Tokens\KeywordType.cs" />
+    <Compile Include="Model\Tokens\NumberLiteralToken.cs" />
+    <Compile Include="Model\Tokens\OpenBraceToken.cs" />
+    <Compile Include="Model\Tokens\OperatorToken.cs" />
+    <Compile Include="Model\Tokens\OperatorType.cs" />
+    <Compile Include="Model\Tokens\StatementSperatorToken.cs" />
+    <Compile Include="Model\Tokens\VariableType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Input\" />
+    <Folder Include="IntermediateCodeGeneration\" />
+    <Folder Include="SyntaxAnalysis\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
