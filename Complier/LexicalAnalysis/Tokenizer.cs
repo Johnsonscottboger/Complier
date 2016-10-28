@@ -35,7 +35,7 @@ namespace Complier.LexicalAnalysis
         {
             var tokens = new List<Token>();
             var builder = new StringBuilder();
-            if (!Eof())
+            while (!Eof())
             {
                 //跳过空白符
                 Skip(CharType.WhiteSpace);

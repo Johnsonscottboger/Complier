@@ -45,6 +45,24 @@
   <ItemGroup>
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="LexicalAnalysis\Tokenizer.cs" />
+    <Compile Include="Model\Ast\AstNode.cs" />
+    <Compile Include="Model\Ast\BinaryOperationNode.cs" />
+    <Compile Include="Model\Ast\ExpressionNode.cs" />
+    <Compile Include="Model\Ast\ExpressionOperationType.cs" />
+    <Compile Include="Model\Ast\FunctionCallExpressionNode.cs" />
+    <Compile Include="Model\Ast\FunctionDeclarationNode.cs" />
+    <Compile Include="Model\Ast\IfStatementNode.cs" />
+    <Compile Include="Model\Ast\LoopStatementNode.cs" />
+    <Compile Include="Model\Ast\NumberLiteralNode.cs" />
+    <Compile Include="Model\Ast\ParameterDeclarationNode.cs" />
+    <Compile Include="Model\Ast\ProgramNode.cs" />
+    <Compile Include="Model\Ast\ReturnStatementNode.cs" />
+    <Compile Include="Model\Ast\StatementSequenceNode.cs" />
+    <Compile Include="Model\Ast\UnaryOperationNode.cs" />
+    <Compile Include="Model\Ast\VariableAssingmentNode.cs" />
+    <Compile Include="Model\Ast\VariableDeclarationNode.cs" />
+    <Compile Include="Model\Ast\VariableReferenceExpressionNode.cs" />
+    <Compile Include="Model\Ast\WhileLoopNode.cs" />
     <Compile Include="Model\Lexing.cs" />
     <Compile Include="Model\SourceCode.cs" />
     <Compile Include="Model\Token.cs" />
@@ -63,14 +81,16 @@
     <Compile Include="Model\Tokens\VariableType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyntaxAnalysis\ExpressionParser.cs" />
+    <Compile Include="SyntaxAnalysis\Parser.cs" />
+    <Compile Include="SyntaxAnalysis\ParsingException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CodeGeneration\" />
     <Folder Include="Input\" />
-    <Folder Include="IntermediateCodeGeneration\" />
-    <Folder Include="SyntaxAnalysis\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
