@@ -64,8 +64,8 @@ namespace Complier.SyntaxAnalysis
             { OperatorType.Or, ExpressionOperationType.Or},
         };
 
-        //used to distigush between unary and binary minus
-        private bool lastTokenWasOperatorOrLeftBrace = true; //beginning of input is like a left brace
+        
+        private bool lastTokenWasOperatorOrLeftBrace = true;
 
         /// <summary>
         /// Parses the given tokens to an AST.
@@ -127,6 +127,9 @@ namespace Complier.SyntaxAnalysis
                     //this could be a function call, but we would need a lookahead to check for an opening brace.
                     //just handle this as a variable reference and change it to a function when a open brace is found
                     working.Push(new VariableReferenceExpressionNode(((IdentifierToken)token).Content));
+
+                    //添加
+                    lastTokenWasOperatorOrLeftBrace = false;
                 }
                 else if(token is ArgSeperatorToken)
                 {

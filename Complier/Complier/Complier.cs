@@ -34,14 +34,17 @@ using System.Reflection;
             string codeHead = @"
 sealed class SimpleC
 {
-    public static void Main()
-    {
-//----------your code here-----------
 ";
+
+
             //userCode here
             string codeTail = @"
+    public static void Main()
+    {
 //----------your code here-----------
-        Console.WriteLine(i);
+//----------your code here-----------
+        SimpleC p=new SimpleC();
+        Console.WriteLine(p.main());
     }
 }
 ";
@@ -53,12 +56,14 @@ sealed class SimpleC
         {
             if (result.Errors.HasErrors)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Build Error:");
                 Console.WriteLine("Error Numeber:{0}", result.Errors.Count);
                 foreach(CompilerError item in result.Errors)
                 {
                     Console.WriteLine("Line:{0}\tError:{1}", item.Line, item.ErrorText);
                 }
+                Console.ResetColor();
             }
             Console.WriteLine("Build Success!");
             try

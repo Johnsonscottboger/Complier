@@ -14,11 +14,14 @@ namespace Complier.Model.Ast
         {
             if (cond == null)
                 throw new ParsingException("Parser: An while loop must conatain a condition!");
+            else
+                Condition = cond;
         }
 
         public override void Print()
         {
             Console.Write("{0}\t\t ", "WhileLoop");
+            Condition.Print();
             foreach(var item in SubNodes)
             {
                 item.Print();

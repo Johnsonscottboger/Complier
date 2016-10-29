@@ -55,7 +55,6 @@ namespace Complier.Model
         /// </summary>
         StatementSeperator = 0x100,
 
-
         AlphaNumeric = Alpha | Numeric,
         WhiteSpace = LineSpace | NewLine,
         Brace = OpenBrace | CloseBrace,

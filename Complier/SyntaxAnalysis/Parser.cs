@@ -12,7 +12,7 @@ namespace Complier.SyntaxAnalysis
     public class Parser
     {
         public Token[] tokens { get; private set; }
-        private int readingPosition;
+        private static int readingPosition;
         private Stack<StatementSequenceNode> scopes;
         private static readonly KeywordType[] typeKeywords = { KeywordType.Int, KeywordType.Void };
 
@@ -29,7 +29,8 @@ namespace Complier.SyntaxAnalysis
         /// <returns></returns>
         public ProgramNode ParseToAst()
         {
-            scopes.Push(new ProgramNode());
+            if(scopes.Count==0)
+                scopes.Push(new ProgramNode());
             while (!Eof())
             {
                 if (Peek() is KeywordToken)
@@ -111,6 +112,17 @@ namespace Complier.SyntaxAnalysis
                                     var @while = new WhileLoopNode(ExpressionNode.CreateFromTokens(ReadUntilClosingBrace()));
                                     scopes.Peek().AddStatement(@while);
                                     scopes.Push(@while);
+                                    //while内部循环体
+                                    if(Next() is OpenBraceToken)    //包含在大括号中
+                                    {
+                                        while(!(Peek() is CloseBraceToken))
+                                        {
+                                            
+                                        }
+                                    }else                           //没有大括号
+                                    {
+                                        
+                                    }
                                     break;
                                 default:
                                     throw new ParsingException("Unexpected keyword type.");
@@ -167,8 +179,17 @@ namespace Complier.SyntaxAnalysis
 
         private IEnumerable<Token> ReadUntilClosingBrace()
         {
+            //while (!Eof() && !(Peek() is CloseBraceToken))
+            //    yield return Next();
+            //Next();
+            bool getNext = true;
             while (!Eof() && !(Peek() is CloseBraceToken))
                 yield return Next();
+            while (getNext)
+            {
+                getNext = false;
+                yield return Peek();
+            }
             Next();
         }
 
@@ -201,5 +222,7 @@ namespace Complier.SyntaxAnalysis
             readingPosition++;
             return ret;
         }
+
+        
     }
 }

@@ -42,7 +42,7 @@ namespace Complier.LexicalAnalysis
 
                 switch (PeekType())
                 {
-                    case CharType.Alpha: //start of identifier
+                    case CharType.Alpha:
                         ReadToken(builder, CharType.AlphaNumeric);
                         string s = builder.ToString();
                         if (KeywordToken.IsKeyword(s))
@@ -98,6 +98,8 @@ namespace Complier.LexicalAnalysis
                 case '&':
                 case '|':
                 case '=':
+                case '>':
+                case '<':
                     return CharType.Operator;
                 case '(':
                 case '[':

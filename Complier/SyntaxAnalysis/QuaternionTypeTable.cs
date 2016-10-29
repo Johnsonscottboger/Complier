@@ -18,7 +18,7 @@ namespace Complier.SyntaxAnalysis
         /// <param name="ast"></param>
         public void PrintAst(ProgramNode ast)
         {
-            Console.WriteLine("---------------------------------------------------------------------------");
+            Console.WriteLine("--------------------------------------------------------");
             Console.WriteLine("Operator    | \targ1\t | \targ2\t | \tresult\t");
             foreach(var item in ast.SubNodes)
             {
