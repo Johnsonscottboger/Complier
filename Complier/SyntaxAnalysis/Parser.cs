@@ -107,21 +107,18 @@ namespace Complier.SyntaxAnalysis
                                     var @if = new IfStatementNode(ExpressionNode.CreateFromTokens(ReadUntilClosingBrace()));
                                     scopes.Peek().AddStatement(@if);
                                     scopes.Push(@if);
+                                    if (Peek() is OpenBraceToken && ((OpenBraceToken)Peek()).BraceType == BraceType.Curly)
+                                    {
+                                        Next();
+                                    }
                                     break;
                                 case KeywordType.While:
                                     var @while = new WhileLoopNode(ExpressionNode.CreateFromTokens(ReadUntilClosingBrace()));
                                     scopes.Peek().AddStatement(@while);
                                     scopes.Push(@while);
-                                    //while内部循环体
-                                    if(Next() is OpenBraceToken)    //包含在大括号中
+                                    if(Peek() is OpenBraceToken && ((OpenBraceToken)Peek()).BraceType == BraceType.Curly)
                                     {
-                                        while(!(Peek() is CloseBraceToken))
-                                        {
-                                            
-                                        }
-                                    }else                           //没有大括号
-                                    {
-                                        
+                                        Next();
                                     }
                                     break;
                                 default:
