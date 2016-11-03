@@ -5,7 +5,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 变量引用
     /// </summary>
-    class VariableReferenceExpressionNode : ExpressionNode
+    public class VariableReferenceExpressionNode : ExpressionNode
     {
         public string VariableName { get; private set; }
 

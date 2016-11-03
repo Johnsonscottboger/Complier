@@ -9,7 +9,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 函数声明
     /// </summary>
-    class FunctionDeclarationNode : StatementSequenceNode
+    public class FunctionDeclarationNode : StatementSequenceNode
     {
         public string FunctionName { get; private set; }
 

@@ -9,7 +9,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 循环语句
     /// </summary>
-    class LoopStatementNode : StatementSequenceNode
+    public class LoopStatementNode : StatementSequenceNode
     {
         public override void Print()
         {

@@ -6,7 +6,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// While循环
     /// </summary>
-    class WhileLoopNode : LoopStatementNode
+    public class WhileLoopNode : LoopStatementNode
     {
         public ExpressionNode Condition { get; private set; }
 

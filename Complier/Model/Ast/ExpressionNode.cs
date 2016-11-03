@@ -6,7 +6,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 抽象表达式结点
     /// </summary>
-    abstract class ExpressionNode : AstNode
+    public abstract class ExpressionNode : AstNode
     {
         protected ExpressionNode()
         { }

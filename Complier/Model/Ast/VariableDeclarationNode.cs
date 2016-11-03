@@ -6,7 +6,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 变量定义
     /// </summary>
-    class VariableDeclarationNode : AstNode
+    public class VariableDeclarationNode : AstNode
     {
         public ExpressionNode InitialValueExpression { get; private set; }
         public VariableType Type { get; private set; }

@@ -6,7 +6,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 参数定义
     /// </summary>
-    class ParameterDeclarationNode
+    public class ParameterDeclarationNode
     {
         public VariableType Type { get; private set; }
         public string Name { get; private set; }

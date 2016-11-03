@@ -6,7 +6,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 一元操作符
     /// </summary>
-    class UnaryOperationNode : ExpressionNode
+    public class UnaryOperationNode : ExpressionNode
     {
         public ExpressionOperationType OperationType { get; private set; }
         public ExpressionNode Operand { get; private set; }

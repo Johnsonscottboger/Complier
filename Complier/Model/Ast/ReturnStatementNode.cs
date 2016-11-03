@@ -5,7 +5,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// return”Ôæ‰
     /// </summary>
-    class ReturnStatementNode : AstNode
+    public class ReturnStatementNode : AstNode
     {
         /// <summary>
         /// A expression for the value returned. Might be null, if

@@ -7,7 +7,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 函数调用
     /// </summary>
-    class FunctionCallExpressionNode : ExpressionNode
+    public class FunctionCallExpressionNode : ExpressionNode
     {
         public string FunctionName { get; private set; }
 

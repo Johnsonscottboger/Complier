@@ -6,7 +6,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// If语句
     /// </summary>
-    class IfStatementNode : StatementSequenceNode
+    public class IfStatementNode : StatementSequenceNode
     {
         public ExpressionNode Condition { get; private set; }
 

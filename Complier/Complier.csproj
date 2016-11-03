@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeGenerator\AssemblyGenerate.cs" />
+    <Compile Include="CodeGenerator\ICodeGenerator.cs" />
     <Compile Include="Complier\Complier.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="LexicalAnalysis\Tokenizer.cs" />

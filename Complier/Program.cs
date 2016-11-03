@@ -1,4 +1,5 @@
-﻿using Complier.LexicalAnalysis;
+﻿using Complier.CodeGenerator;
+using Complier.LexicalAnalysis;
 using Complier.SyntaxAnalysis;
 using System;
 using System.CodeDom.Compiler;
@@ -97,6 +98,9 @@ int main()
             //四元式表
             QuaternionTypeTable table = new QuaternionTypeTable();
             table.PrintAst(ast);
+
+            var codeGeneratr = new AssemblyGenerate();
+            codeGeneratr.Generate(ast);
 
             //编译
             Console.ForegroundColor = ConsoleColor.Green;

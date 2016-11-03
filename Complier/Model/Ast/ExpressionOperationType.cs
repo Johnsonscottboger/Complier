@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Complier.Model.Ast
 {
-    enum ExpressionOperationType
+    public enum ExpressionOperationType
     {
         Add,            //加
         Substract,      //减

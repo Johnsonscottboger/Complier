@@ -6,7 +6,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 二元操作符结点
     /// </summary>
-    class BinaryOperationNode : ExpressionNode
+    public class BinaryOperationNode : ExpressionNode
     {
         public ExpressionOperationType OperationType { get; private set; }
         public ExpressionNode OperandA { get; private set; }

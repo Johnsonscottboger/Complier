@@ -6,7 +6,7 @@ namespace Complier.Model.Ast
     /// <summary>
     /// 变量赋值
     /// </summary>
-    class VariableAssingmentNode : AstNode
+    public class VariableAssingmentNode : AstNode
     {
         public string VariableName { get; private set; }
         public ExpressionNode ValueExpression { get; private set; }
