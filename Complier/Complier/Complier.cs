@@ -32,18 +32,17 @@ using System.Threading;
 using System.Reflection;
 ";
             string codeHead = @"
-sealed class SimpleC
+sealed class Program
 {
 ";
 
 
-            //userCode here
             string codeTail = @"
     public static void Main()
     {
 //----------your code here-----------
 //----------your code here-----------
-        SimpleC p=new SimpleC();
+        Program p=new Program();
         Console.WriteLine(p.main());
     }
 }
@@ -67,11 +66,11 @@ sealed class SimpleC
             }
             Console.WriteLine("Build Success!");
             try
-            {//call Main entry, Console output --> WinForm Control
+            {
 #if CompileIntoMemory
-                Type Phoenix = result.CompiledAssembly.GetType("SimpleC");
+                Type type = result.CompiledAssembly.GetType("Program");
                 Phoenix.GetMethod("Main").Invoke(null,new string[]{});
-#else    //start another thread to run the generated application
+#else
                 System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo
                 {
                     FileName = result.PathToAssembly,

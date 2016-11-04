@@ -46,19 +46,19 @@ namespace Complier.SyntaxAnalysis
                             var name = ReadToken<IdentifierToken>();
                             //超前搜索
                             Token lookahead = Peek();
-                            if (lookahead is OperatorToken && (((OperatorToken)lookahead).OperatorType == OperatorType.Assignment) || lookahead is StatementSperatorToken) //variable declaration
+                            if (lookahead is OperatorToken && (((OperatorToken)lookahead).OperatorType == OperatorType.Assignment) || lookahead is StatementSperatorToken) 
                             {
                                 if (lookahead is OperatorToken)
                                     Next(); 
                                 scopes.Peek().AddStatement(new VariableDeclarationNode(varType, name.Content, ExpressionNode.CreateFromTokens(ReadUntilStatementSeperator())));
                             }
-                            else if (lookahead is OpenBraceToken && (((OpenBraceToken)lookahead).BraceType == BraceType.Round)) //function definition
+                            else if (lookahead is OpenBraceToken && (((OpenBraceToken)lookahead).BraceType == BraceType.Round)) 
                             {
                                 var func = new FunctionDeclarationNode(name.Content);
                                 scopes.Peek().AddStatement(func); 
                                 scopes.Push(func); 
                                 Next(); 
-                                while (!(Peek() is CloseBraceToken && ((CloseBraceToken)Peek()).BraceType == BraceType.Round)) //TODO: Refactor using readUntilClosingBrace?
+                                while (!(Peek() is CloseBraceToken && ((CloseBraceToken)Peek()).BraceType == BraceType.Round)) 
                                 {
                                     var argType = ReadToken<KeywordToken>();
                                     if (!argType.IsTypeKeyword)

@@ -99,6 +99,10 @@ int main()
             QuaternionTypeTable table = new QuaternionTypeTable();
             table.PrintAst(ast);
 
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("**********************代码生成*************************");
+            Console.ResetColor();
             var codeGeneratr = new AssemblyGenerate();
             codeGeneratr.Generate(ast);
 

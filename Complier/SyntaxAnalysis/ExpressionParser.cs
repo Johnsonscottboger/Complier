@@ -6,21 +6,12 @@ using System.Linq;
 
 namespace Complier.SyntaxAnalysis
 {
-    /// <summary>
-    /// Parser for SimpleC expressions. Used internally
-    /// by the parser.
-    /// </summary>
-    /// <remarks>
-    /// Uses the shunting-yard algorithm by Dijkstra.
-    /// Good explanation here: http://wcipeg.com/wiki/Shunting_yard_algorithm
-    /// </remarks>
     class ExpressionParser
     {
         private Stack<ExpressionNode> working = new Stack<ExpressionNode>();
         private Stack<ExpressionOperationType> operators = new Stack<ExpressionOperationType>();
         private Stack<int> arity = new Stack<int>();
 
-        //taken from http://en.wikipedia.org/wiki/Operators_in_C_and_C++
         private static readonly Dictionary<ExpressionOperationType, int> operationPrecedence = new Dictionary<ExpressionOperationType, int>()
         {    
             {ExpressionOperationType.OpenBrace, 0},
@@ -48,7 +39,6 @@ namespace Complier.SyntaxAnalysis
         private static readonly Dictionary<OperatorType, ExpressionOperationType> operatorToOperation = new Dictionary<OperatorType, ExpressionOperationType>()
         {
             { OperatorType.Add, ExpressionOperationType.Add},
-            //{ OperatorType.SubstractNegate, /* not directly converitble, need to check for unary/binray */},
             { OperatorType.Multiply, ExpressionOperationType.Multiply},
             { OperatorType.Divide, ExpressionOperationType.Divide},
             { OperatorType.Modulo, ExpressionOperationType.Modulo},
@@ -68,7 +58,7 @@ namespace Complier.SyntaxAnalysis
         private bool lastTokenWasOperatorOrLeftBrace = true;
 
         /// <summary>
-        /// Parses the given tokens to an AST.
+        /// 解析token到抽象语法树
         /// </summary>
         public ExpressionNode Parse(IEnumerable<Token> tokens)
         {
@@ -85,13 +75,12 @@ namespace Complier.SyntaxAnalysis
                 else if (token is OperatorToken)
                 {
                     ExpressionOperationType op;
-                    if (((OperatorToken)token).OperatorType == OperatorType.SubstractNegate) //need to check if binary of unary
+                    if (((OperatorToken)token).OperatorType == OperatorType.SubstractNegate)
                         op = lastTokenWasOperatorOrLeftBrace ? ExpressionOperationType.Negate : ExpressionOperationType.Substract;
-                    else //normal operator
+                    else
                         op = operatorToOperation[((OperatorToken)token).OperatorType];
 
-                    //TODO: Do we need to check for assosiativity? Only unary operators and assignments are rtl-assosiativ
-                    while (operators.Count != 0 && operationPrecedence[operators.Peek()] > operationPrecedence[op]) //stack empty or only low precendence operators on stack
+                    while (operators.Count != 0 && operationPrecedence[operators.Peek()] > operationPrecedence[op]) 
                     {
                         PopOperator();
                     }
@@ -100,7 +89,7 @@ namespace Complier.SyntaxAnalysis
                 }
                 else if (token is OpenBraceToken && ((OpenBraceToken)token).BraceType == BraceType.Round)
                 {
-                    if(working.Count > 0 && working.Peek() is VariableReferenceExpressionNode) //we have a "variable" sitting on top of the op stack, this must be the name of a function to be called. Let's fix this.
+                    if(working.Count > 0 && working.Peek() is VariableReferenceExpressionNode) 
                     {
                         var variable = (VariableReferenceExpressionNode)working.Pop();
                         working.Push(new FunctionCallExpressionNode(variable.VariableName));
@@ -115,27 +104,25 @@ namespace Complier.SyntaxAnalysis
                 {
                     while (operators.Peek() != ExpressionOperationType.OpenBrace)
                         PopOperator();
-                    operators.Pop(); //pop the opening brace from the stack
+                    operators.Pop();
 
-                    if(operators.Count > 0 && operators.Peek() == ExpressionOperationType.FunctionCall) //function call sitting on top of the stack
+                    if(operators.Count > 0 && operators.Peek() == ExpressionOperationType.FunctionCall)
                         PopOperator();
 
                     lastTokenWasOperatorOrLeftBrace = false;
                 }
                 else if(token is IdentifierToken)
                 {
-                    //this could be a function call, but we would need a lookahead to check for an opening brace.
-                    //just handle this as a variable reference and change it to a function when a open brace is found
                     working.Push(new VariableReferenceExpressionNode(((IdentifierToken)token).Content));
 
-                    //添加
                     lastTokenWasOperatorOrLeftBrace = false;
                 }
                 else if(token is ArgSeperatorToken)
                 {
-                    arity.Push(arity.Pop() + 1); //increase arity on top of the stack
+                    //参数个数
+                    arity.Push(arity.Pop() + 1); 
                     
-                    while (operators.Peek() != ExpressionOperationType.OpenBrace) //pop till the open brace of this function call
+                    while (operators.Peek() != ExpressionOperationType.OpenBrace)
                         PopOperator();
                 }
                 else
@@ -145,7 +132,7 @@ namespace Complier.SyntaxAnalysis
             if (sequenceWasEmpty)
                 return null;
 
-            //end of tokens, apply all the remaining operators
+            
             while (operators.Count != 0)
                 PopOperator();
 
@@ -155,25 +142,21 @@ namespace Complier.SyntaxAnalysis
             return working.Pop();
         }
 
-        //pop and "apply" operator
         private void PopOperator()
         {
             var op = operators.Pop();
             if(op == ExpressionOperationType.FunctionCall)
             {
-                //collect the args
                 List<ExpressionNode> args = new List<ExpressionNode>();
                 int functionArity = arity.Pop();
                 for (int i = 0; i < functionArity; i++)
                     args.Add(working.Pop());
-                //add them to the function call sitting on top of the stack
                 ((FunctionCallExpressionNode)working.Peek()).AddArguments(args);
             }
             else if (unaryOperators.Contains(op))
                 working.Push(new UnaryOperationNode(op, working.Pop()));
-            else //binary
+            else
             {
-                //reverse order of operands!
                 var opB = working.Pop();
                 var opA = working.Pop();
 

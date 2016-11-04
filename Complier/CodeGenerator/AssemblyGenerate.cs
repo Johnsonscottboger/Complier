@@ -96,8 +96,9 @@ namespace Complier.CodeGenerator
         {
             var builder = new StringBuilder();
             builder.Append("变量定义：");
-            builder.AppendFormat("{0} {1} {2}", node.Type, node.Name, node.InitialValueExpression);
-            Console.WriteLine(builder.ToString());
+            builder.AppendFormat("{0} {1} ", node.Type, node.Name);
+            Console.Write(builder.ToString());
+            Visit((Object)node.InitialValueExpression);
         }
 
         /// <summary>
@@ -108,8 +109,8 @@ namespace Complier.CodeGenerator
         {
             var builder = new StringBuilder();
             builder.AppendLine("返回语句:");
-            builder.Append(node.ValueExpression);
             Console.WriteLine(builder.ToString());
+            Visit((Object)node.ValueExpression);
         }
 
         /// <summary>
@@ -119,14 +120,15 @@ namespace Complier.CodeGenerator
         public void Visit(IfStatementNode node)
         {
             var builder = new StringBuilder();
-            builder.AppendLine("if条件语句：");
-            builder.AppendFormat("  条件：{0}",node.Condition);
+            builder.Append("if条件语句：");
+            builder.Append("  条件：");
+            Visit((Object)node.Condition);
             builder.AppendLine("条件语句块:");
+            Console.WriteLine(builder.ToString());
             foreach(var item in node.SubNodes)
             {
                 Visit((Object)item);
             }
-            Console.WriteLine(builder.ToString());
         }
 
         /// <summary>
@@ -136,14 +138,15 @@ namespace Complier.CodeGenerator
         public void Visit(WhileLoopNode node)
         {
             var builder = new StringBuilder();
-            builder.AppendLine("while条件语句：");
-            builder.AppendFormat("  条件：{0}", node.Condition);
+            builder.Append("while条件语句：");
+            builder.Append("  条件：");
+            Visit((Object)node.Condition);
             builder.AppendLine("条件语句块:");
+            Console.WriteLine(builder.ToString());
             foreach (var item in node.SubNodes)
             {
                 Visit((Object)item);
             }
-            Console.WriteLine(builder.ToString());
         }
 
         /// <summary>
@@ -155,8 +158,8 @@ namespace Complier.CodeGenerator
             var builder = new StringBuilder();
             builder.Append("变量赋值：");
             builder.Append(node.VariableName);
-            Visit((Object)node.ValueExpression);
             Console.WriteLine(builder.ToString());
+            Visit((Object)node.ValueExpression);
         }
 
         /// <summary>
@@ -166,19 +169,19 @@ namespace Complier.CodeGenerator
         public void Visit(FunctionDeclarationNode node)
         {
             var builder = new StringBuilder();
-            builder.AppendLine("函数定义:");
+            builder.Append("函数定义:");
             builder.AppendFormat("    函数名称:{0}\n", node.FunctionName);
-            builder.AppendLine("    函数参数:");
+            builder.Append("    函数参数:");
             foreach(var item in node.Parameters)
             {
                 builder.Append(item);
             }
             builder.AppendLine("    函数体：");
+            Console.WriteLine(builder.ToString());
             foreach(var item in node.SubNodes)
             {
                 Visit((Object)item);
             }
-            Console.WriteLine(builder.ToString());
         }
 
         /// <summary>
@@ -187,7 +190,10 @@ namespace Complier.CodeGenerator
         /// <param name="node"></param>
         public void Visit(ParameterDeclarationNode node)
         {
-
+            var builder = new StringBuilder();
+            builder.Append("函数参数：");
+            builder.AppendFormat("{0} {1}", node.Type, node.Name);
+            Console.Write(builder.ToString());
         }
 
         /// <summary>
@@ -196,7 +202,12 @@ namespace Complier.CodeGenerator
         /// <param name="node"></param>
         public void Visit(BinaryOperationNode node)
         {
-
+            var builder = new StringBuilder();
+            builder.Append("二元操作符:");
+            Console.WriteLine(builder.ToString());
+            Visit((Object)node.OperandA);
+            Console.Write(node.OperationType);
+            Visit((Object)node.OperandB);
         }
 
         /// <summary>
@@ -205,7 +216,15 @@ namespace Complier.CodeGenerator
         /// <param name="node"></param>
         public void Visit(FunctionCallExpressionNode node)
         {
-
+            var builder = new StringBuilder();
+            builder.Append("函数调用：");
+            builder.AppendFormat("{0}(", node.FunctionName);
+            foreach(var item in node.Arguments)
+            {
+                builder.Append(item.ToString()+",");
+            }
+            builder.Replace(",", ")",builder.Length, 1);
+            Console.WriteLine(builder.ToString());
         }
 
         /// <summary>
@@ -214,7 +233,7 @@ namespace Complier.CodeGenerator
         /// <param name="node"></param>
         public void Visit(NumberLiteralNode node)
         {
-
+            Console.Write(node.Value);
         }
 
         /// <summary>
@@ -223,7 +242,7 @@ namespace Complier.CodeGenerator
         /// <param name="node"></param>
         public void Visit(UnaryOperationNode node)
         {
-
+            Visit((Object)node.OperationType);
         }
 
         /// <summary>
@@ -232,7 +251,8 @@ namespace Complier.CodeGenerator
         /// <param name="node"></param>
         public void Visit(VariableReferenceExpressionNode node)
         {
-
+            Console.Write("变量调用:");
+            Console.Write(node.VariableName);
         }
     }
 }
